@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SisEdutivaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="APRUEBA">
+    <Key>
+      <PropertyRef Name="IDALUMNO" />
+    </Key>
+    <Property Name="IDALUMNO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ALUMNO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="APELLIDO" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="EDAD" Type="Int32" />
+    <Property Name="SUELDO" Type="Decimal" Precision="8" Scale="2" />
+  </EntityType>
+  <EntityContainer Name="SisEdutivaEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="APRUEBA" EntityType="Self.APRUEBA" />
+  </EntityContainer>
+</Schema>

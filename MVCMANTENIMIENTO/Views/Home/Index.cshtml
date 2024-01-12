@@ -1,0 +1,199 @@
+﻿@model MVCMANTENIMIENTO.Models.APRUEBA
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>Listado de Esan</h2>
+
+<!-- Click on Modal Button -->
+<!-- Modal para Insertar -->
+<div class="modal" id="modalForm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Formulario para Registro</h3>
+            </div>
+            <div class="modal-body">
+                <form action="@Url.Action("Insertar","Home")" method="post">
+                    <div class="mb-3">
+                        <label class="form-label">ALUMNO</label>
+                        <input type="text" class="form-control" id="Alumno" name="ALUMNO" placeholder="Nombre" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Apellidos</label>
+                        <input type="text" class="form-control" id="Apellido" name="Apellido" placeholder="Apellido" />
+                    </div>
+                    <div class="mb-3 form-check">
+                        <label class="form-label">Edad</label>
+                        <input type="text" class="form-control" id="Edad" name="Edad" placeholder="Edad" />
+                    </div>
+                    <div class="mb-3 form-check">
+                        <label class="form-label">Sueldo</label>
+                        <input type="text" class="form-control" id="Sueldo" name="Sueldo" placeholder="Sueldo" />
+                    </div>
+                    <br />
+                    <div class="modal-footer d-block">
+                        <button type="submit" @*onclick="insertarEmpleadoModal()"*@ class="btn btn-success float-end">Registrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal para Actualizar -->
+<div class="modal" id="modalActualizar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Actualizar Empleado</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formActualizar" action="@Url.Action("ActualizarEmpleado", "Home")" method="post">
+                    @Html.HiddenFor(model => model.IDALUMNO)
+                    <div class="mb-3">
+                        <label class="form-label">ALUMNO</label>
+                        @Html.TextBoxFor(model => model.ALUMNO, new { @class = "form-control" })
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Apellidos</label>
+                        @Html.TextBoxFor(model => model.APELLIDO, new { @class = "form-control" })
+                    </div>
+                    <div class="mb-3 form-check">
+                        <label class="form-label">Edad</label>
+                        @Html.TextBoxFor(model => model.EDAD, new { @class = "form-control" })
+                    </div>
+                    <div class="mb-3 form-check">
+                        <label class="form-label">Sueldo</label>
+                        @Html.TextBoxFor(model => model.SUELDO, new { @class = "form-control" })
+                    </div>
+                    <br />
+                    <div class="modal-footer d-block">
+                        <button type="submit" class="btn btn-success float-end">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button type="button" id="btnInsertar" class="btn btn-success mx-auto d-block mt-5" data-bs-toggle="modal" data-bs-target="#modalForm">
+    Nuevo Registro
+</button>
+<br />
+<br />
+
+<table id="myTable" class="table table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>ALUMNO</th>
+            <th>APELLIDO</th>
+            <th>EDAD</th>
+            <th>SUELDO</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+
+
+</table>
+
+
+
+
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            // DataTables con AJAX
+            $('#myTable').DataTable({
+                ajax: {
+                    url: "@Url.Action("Listar", "Home")",
+                    type: "GET",
+                    dataType: "json",
+                    dataSrc: ""
+                },
+                columns: [
+                    { data: "ALUMNO" },
+                    { data: "APELLIDO" },
+                    { data: "EDAD" },
+                    { data: "SUELDO" },
+                    {
+                        data: "IDALUMNO",
+                        render: function (data) {
+                            return '<button type="button" onclick="abrirModalActualizar(' + data + ')" class="btn btn-warning">Actualizar</button>' +
+                                '<span style="margin-right: 15px;"></span>' + // Ajusta el valor de margin-right según sea necesario
+                                '<button type="button" onclick="eliminarEmpleado(' + data + ')" class="btn btn-danger">Eliminar</button>';
+
+
+                        }
+                    }
+
+                ]
+            });
+
+
+
+        });
+
+        function abrirModalActualizar(idEmpleado) {
+    // Hacer una solicitud AJAX para obtener los detalles del empleado por su ID
+            $.ajax({
+                url: "@Url.Action("ObtenerDetalleEmpleado", "Home")", // Reemplaza con la URL correcta de tu acción
+                type: "GET",
+                data: { id: idEmpleado },
+                success: function (data) {
+                    // Llenar el formulario de actualización con los detalles del empleado
+                    $('#IDALUMNO').val(data.IDALUMNO);
+                    $('#ALUMNO').val(data.ALUMNO);
+                    $('#APELLIDO').val(data.APELLIDO);
+                    $('#EDAD').val(data.EDAD);
+                    $('#SUELDO').val(data.SUELDO);
+
+                    // Abrir el modal
+                    $('#modalActualizar').modal('show');
+                },
+                error: function () {
+                    alert('Error al cargar los detalles del empleado');
+                }
+            });
+        }
+
+        function eliminarEmpleado(idEmpleado) {
+            if (confirm("¿Estás seguro de que deseas eliminar este empleado?")) {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("EliminarEmpleado", "Home")",
+                    data: { idEmpleado: idEmpleado },
+                    success: function (response) {
+                        if (response.success) {
+                            alert("Empleado eliminado exitosamente");
+                            // Recargar la tabla después de la eliminación
+                            $('#myTable').DataTable().ajax.reload();
+                        } else {
+                            alert("Error al eliminar empleado: " + response.message);
+                        }
+                    },
+                    error: function () {
+                        alert("Error en la solicitud AJAX para eliminar empleado");
+                    }
+                });
+    }
+}
+
+
+
+
+
+
+
+
+
+
+    </script>
+}

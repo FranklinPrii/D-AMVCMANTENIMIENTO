@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SisEdutivaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="APRUEBA">
+          <Key>
+            <PropertyRef Name="IDALUMNO" />
+          </Key>
+          <Property Name="IDALUMNO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ALUMNO" Type="varchar" MaxLength="30" />
+          <Property Name="APELLIDO" Type="varchar" MaxLength="40" />
+          <Property Name="EDAD" Type="int" />
+          <Property Name="SUELDO" Type="decimal" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="SisEdutivaModelStoreContainer">
+          <EntitySet Name="APRUEBA" EntityType="Self.APRUEBA" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SisEdutivaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="APRUEBA">
+          <Key>
+            <PropertyRef Name="IDALUMNO" />
+          </Key>
+          <Property Name="IDALUMNO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ALUMNO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDO" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="EDAD" Type="Int32" />
+          <Property Name="SUELDO" Type="Decimal" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="SisEdutivaEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="APRUEBA" EntityType="Self.APRUEBA" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SisEdutivaModelStoreContainer" CdmEntityContainer="SisEdutivaEntities1">
+          <EntitySetMapping Name="APRUEBA">
+            <EntityTypeMapping TypeName="SisEdutivaModel.APRUEBA">
+              <MappingFragment StoreEntitySet="APRUEBA">
+                <ScalarProperty Name="IDALUMNO" ColumnName="IDALUMNO" />
+                <ScalarProperty Name="ALUMNO" ColumnName="ALUMNO" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="EDAD" ColumnName="EDAD" />
+                <ScalarProperty Name="SUELDO" ColumnName="SUELDO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

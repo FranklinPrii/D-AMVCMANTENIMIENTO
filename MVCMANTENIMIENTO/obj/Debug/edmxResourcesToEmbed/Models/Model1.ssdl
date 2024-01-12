@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SisEdutivaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="APRUEBA">
+    <Key>
+      <PropertyRef Name="IDALUMNO" />
+    </Key>
+    <Property Name="IDALUMNO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ALUMNO" Type="varchar" MaxLength="30" />
+    <Property Name="APELLIDO" Type="varchar" MaxLength="40" />
+    <Property Name="EDAD" Type="int" />
+    <Property Name="SUELDO" Type="decimal" Precision="8" Scale="2" />
+  </EntityType>
+  <EntityContainer Name="SisEdutivaModelStoreContainer">
+    <EntitySet Name="APRUEBA" EntityType="Self.APRUEBA" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

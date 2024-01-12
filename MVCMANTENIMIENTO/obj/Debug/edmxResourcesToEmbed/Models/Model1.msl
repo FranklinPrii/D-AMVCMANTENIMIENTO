@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SisEdutivaModelStoreContainer" CdmEntityContainer="SisEdutivaEntities1">
+    <EntitySetMapping Name="APRUEBA">
+      <EntityTypeMapping TypeName="SisEdutivaModel.APRUEBA">
+        <MappingFragment StoreEntitySet="APRUEBA">
+          <ScalarProperty Name="IDALUMNO" ColumnName="IDALUMNO" />
+          <ScalarProperty Name="ALUMNO" ColumnName="ALUMNO" />
+          <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+          <ScalarProperty Name="EDAD" ColumnName="EDAD" />
+          <ScalarProperty Name="SUELDO" ColumnName="SUELDO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
